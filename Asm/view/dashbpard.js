@@ -87,8 +87,8 @@ for(item of posts){
         <td><img class="ml-28 my-4 object-cover w-[100px] h-[100px]" src="${item.image}"</td>
         <td>${item.year}</td>
         <td>${item.articleDes}</td>
-        <td><button id="UpdateProduct" class="U" type="submit" ${item.action1}/>Update
-        <button id="DeleteProduct" class="D" type="submit"  ${item.action1}/>Delete
+        <td><button id="updateProduct" class="U" type="submit" ${item.action1}/>Update
+        <button id="deleteProduct" onclick="deletesp(${item.id})" class="D" type="submit"  ${item.action1}/>Delete
         </td>
     </tr>
     `
@@ -141,33 +141,39 @@ addProduct.addEventListener("click", function(e) {
         <td><image class="ml-28 my-4 object-cover w-[100px] h-[100px]" src="${item.imageProduct}"/></td>
         <td>${item.yearProduct}</td>
         <td>${item.descriptionProduct}</td>
-        <td><button id="UpdateProduct" class="U" type="submit" ${item.action1}/>Update
-        <button id="DeleteProduct" class="D" type="submit" ${item.action1}/>Delete
+        <td><button id="updateProduct" class="U" type="submit" ${item.action1}/>Update
+        <button id="deleteProduct" onclick="deletesp(${item.id})" class="D" type="submit" ${item.action1}/>Delete
         </td>
     </tr>
         `
     } 
 });
 
-var updateProduct = document.querySelectorAll("#UpdateProduct");
-var deleteProduct = document.querySelectorAll("#DeleteProduct");
+var updateProduct = document.querySelectorAll("#updateProduct");
+var deleteProduct = document.querySelectorAll("#deleteProduct");
 
-// Delete Product
-deleteProduct.forEach(element => {
-    element.addEventListener("click", function (e) {
-        
-    })
-});
-    /*
-    thêm sửa xóa ở vị trí bất kỳ bằng hàm splice
-    hàm này nhận vào 3 tham số
-    tham số 1: vị trí muốn thêm, sửa hoặc xóa dữ liệu
-    tham số 2: 
-    nếu thêm mới (k xóa đi dữ liệu gì) thì để là 0
-    nếu xóa đi bao nhiêu phần tử thì để vào giá trị đó
-    tham số 3: giá trị cần thêm mới (hoặc cập nhật);
-    */  
+    function deletesp(ye) {
+        posts = posts.filter((item)=>{
+            return item.id !== ye
+        })
+        tbody_one.innerHTML = '';
+        for(item of posts){
+            tbody_one.innerHTML += `
+        <tr>
+            <td>${item.iddProduct}</td>
+            <td>${item.titleProduct}</td>
+            <td><image class="ml-28 my-4 object-cover w-[100px] h-[100px]" src="${item.imageProduct}"/></td>
+            <td>${item.yearProduct}</td>
+            <td>${item.descriptionProduct}</td>
+            <td><button id="UpdateProduct" class="U" type="submit" ${item.action1}/>Update
+            <button id="DeleteProduct" onclick="deletesp(${item.id})" class="D" type="submit" ${item.action1}/>Delete
+            </td>
+        </tr>
+        `
+            console.log(posts);
+        }
 
+    }
 
 
 
